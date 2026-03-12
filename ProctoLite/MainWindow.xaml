@@ -1,0 +1,249 @@
+﻿<Window x:Class="ProctoLite.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        Title="Procto"
+        WindowStyle="None"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <!-- Button Styles -->
+        <Style x:Key="StatusBarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Margin" Value="4,0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#ffffff20"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#ffffff30"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="QuitButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#e03e3e"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,8"/>
+            <Setter Property="Margin" Value="8,0,16,0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#ff5252"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#c62828"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ToolBarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2d2d3a"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#4a90d9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#3a7bc8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="VolumeSliderStyle" TargetType="Slider">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="8,0"/>
+            <Setter Property="Foreground" Value="#4a90d9"/>
+            <Setter Property="Background" Value="#1e1e2e"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="56"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top StatusBar -->
+        <Border Grid.Row="0" Background="#1e1e2e">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.3" Color="#000000"/>
+            </Border.Effect>
+            <DockPanel LastChildFill="False" Margin="16,0">
+
+                <!-- Logo: Shield SVG Path (no ICO reference) -->
+                <Border DockPanel.Dock="Left" Width="32" Height="32"
+                        Background="#4a90d9" CornerRadius="6" Margin="0,0,12,0">
+                    <Viewbox Width="20" Height="20">
+                        <Path Fill="White"
+                              Data="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                    </Viewbox>
+                </Border>
+
+                <!-- Title -->
+                <TextBlock DockPanel.Dock="Left"
+                           x:Name="TitleText"
+                           Text="Procto"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           FontSize="15"
+                           FontWeight="Bold"
+                           Margin="0,0,24,0"/>
+
+                <!-- Status Indicator -->
+                <Border DockPanel.Dock="Left"
+                        Background="#2ecc71"
+                        CornerRadius="10"
+                        Padding="10,4"
+                        Margin="0,0,16,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Fill="White" Margin="0,0,6,0"/>
+                        <TextBlock Text="Ujian Aktif"
+                                   Foreground="White"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Right Side -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Border Background="#ffffff10" CornerRadius="6" Padding="12,6" Margin="0,0,8,0">
+                        <TextBlock x:Name="ClockText"
+                                   Foreground="#aaaacc"
+                                   VerticalAlignment="Center"
+                                   FontSize="13"/>
+                    </Border>
+                    <Button x:Name="BtnQuit"
+                            Content="Keluar Ujian"
+                            Style="{StaticResource QuitButtonStyle}"
+                            Click="BtnQuit_Click"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Browser -->
+        <cef:ChromiumWebBrowser Grid.Row="1" x:Name="Browser"/>
+
+        <!-- Bottom ToolBar -->
+        <Border Grid.Row="2" Background="#1e1e2e">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Direction="270" Opacity="0.3" Color="#000000"/>
+            </Border.Effect>
+            <DockPanel LastChildFill="False" Margin="16,0">
+
+                <!-- Navigation Buttons -->
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <!-- Home -->
+                    <Button x:Name="BtnHome" Style="{StaticResource ToolBarButtonStyle}" ToolTip="Home" Click="BtnHome_Click">
+                        <Viewbox Width="18" Height="18">
+                            <Path Fill="White" Data="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
+                        </Viewbox>
+                    </Button>
+                    <!-- Reload -->
+                    <Button x:Name="BtnReload" Style="{StaticResource ToolBarButtonStyle}" ToolTip="Reload" Click="BtnReload_Click">
+                        <Viewbox Width="18" Height="18">
+                            <Path Fill="White" Data="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/>
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
+
+                <!-- Brightness + Volume -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,0,16,0">
+                    <!-- Brightness -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Viewbox Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center">
+                            <Path Fill="#ffcc44"
+                                  Data="M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,2L14.39,5.42C13.65,5.15 12.84,5 12,5C11.16,5 10.35,5.15 9.61,5.42L12,2M3.34,7L7.5,6.65C6.9,7.16 6.36,7.78 5.94,8.5C5.5,9.24 5.25,10 5.11,10.79L3.34,7M3.36,17L5.12,13.23C5.26,14 5.53,14.78 5.95,15.5C6.37,16.24 6.91,16.86 7.5,17.37L3.36,17M20.65,7L18.88,10.79C18.74,10 18.47,9.23 18.05,8.5C17.63,7.78 17.1,7.15 16.5,6.64L20.65,7M20.64,17L16.5,17.36C17.09,16.85 17.62,16.22 18.04,15.5C18.46,14.77 18.73,14 18.87,13.21L20.64,17M12,22L9.59,18.56C10.33,18.83 11.14,19 12,19C12.82,19 13.63,18.83 14.37,18.56L12,22Z"/>
+                        </Viewbox>
+                        <Slider x:Name="BrightnessSlider"
+                                Style="{StaticResource VolumeSliderStyle}"
+                                Minimum="15" Maximum="100" Value="100"
+                                ValueChanged="BrightnessSlider_ValueChanged"
+                                ToolTip="Screen Brightness"/>
+                        <TextBlock x:Name="BrightnessValue" Text="100%"
+                                   Foreground="#aaaacc" VerticalAlignment="Center"
+                                   Width="40" FontSize="12" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Volume -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="24,0,0,0">
+                        <Viewbox Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center">
+                            <Path Fill="#4a90d9"
+                                  Data="M3,9V15H7L12,20V4L7,9H3M16.5,12C16.5,10.23 15.48,8.71 14,7.97V16C15.48,15.29 16.5,13.76 16.5,12Z"/>
+                        </Viewbox>
+                        <Slider x:Name="VolumeSlider"
+                                Style="{StaticResource VolumeSliderStyle}"
+                                Minimum="0" Maximum="100" Value="100"
+                                ValueChanged="VolumeSlider_ValueChanged"
+                                ToolTip="Volume Control"/>
+                        <TextBlock x:Name="VolumeValue" Text="100%"
+                                   Foreground="#aaaacc" VerticalAlignment="Center"
+                                   Width="40" FontSize="12" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Dark Overlay for Brightness -->
+        <Border x:Name="DarkOverlay" Grid.RowSpan="3" Background="Black" IsHitTestVisible="False" Opacity="0"/>
+    </Grid>
+</Window>
