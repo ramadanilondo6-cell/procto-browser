@@ -1,0 +1,109 @@
+﻿<Window x:Class="ProctoLite.AlertDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Peringatan"
+        Width="480" Height="280"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Topmost="True">
+
+    <Window.Resources>
+        <Style x:Key="AlertButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#f5a623"/>
+            <Setter Property="Foreground" Value="#1e1e2e"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="24,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#ffb74d"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#f57c00"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#1a1a2e"
+            CornerRadius="12"
+            BorderBrush="#f5a623"
+            BorderThickness="2"
+            Padding="32">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.5" Color="#000000"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header with Warning Icon -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                <Border Width="48" Height="48"
+                        Background="#f5a62320"
+                        CornerRadius="10">
+                    <TextBlock Text="âš "
+                               FontSize="26"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                    <TextBlock x:Name="TitleText"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#f5a623"/>
+                    <TextBlock Text="Pelanggaran Keamanan"
+                               FontSize="12"
+                               Foreground="#888899"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Message -->
+            <Border Grid.Row="1"
+                    Background="#f5a62310"
+                    BorderBrush="#f5a62330"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16">
+                <TextBlock x:Name="MessageText"
+                           FontSize="14"
+                           Foreground="#ffffff"
+                           TextWrapping="Wrap"
+                           LineHeight="22"/>
+            </Border>
+
+            <!-- OK Button -->
+            <Button Content="OK"
+                    Grid.Row="2"
+                    Width="120"
+                    HorizontalAlignment="Right"
+                    Margin="0,24,0,0"
+                    Style="{StaticResource AlertButtonStyle}"
+                    Click="BtnOk_Click"/>
+        </Grid>
+    </Border>
+</Window>
