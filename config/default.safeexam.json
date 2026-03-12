@@ -1,0 +1,10 @@
+{
+  "startUrl": "https://www.google.com",
+  "allowedUrls": ["*"],
+  "forbiddenProcesses": ["Taskmgr.exe", "Wireshark.exe", "TeamViewer.exe"],
+  "allowClipboard": false,
+  "allowPrint": false,
+  "quitPassword": "admin",
+  "browserTitle": "Ujian Nasional",
+  "logLevel": "Information"
+}

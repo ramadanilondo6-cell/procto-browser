@@ -1,0 +1,14 @@
+Build Procto dimulai pada 12/03/2026  1:07:49,60 
+Arsitektur : win-x64 
+Mode       : Standard multi-file 
+ 
+  Determining projects to restore...
+C:\Program Files\dotnet\sdk\9.0.305\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0-windows' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [E:\project\safeexam\SafeExamCEF\SafeExamCEF.csproj]
+C:\Program Files\dotnet\sdk\9.0.305\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0-windows' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [E:\project\safeexam\SafeExamCEF\SafeExamCEF.csproj]
+E:\project\safeexam\SafeExamCEF\SafeExamCEF.csproj : warning NU1903: Package 'CefSharp.Wpf.NETCore' 120.1.110 has a known high severity vulnerability, https://github.com/advisories/GHSA-f87w-3j5w-v58p
+  All projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\9.0.305\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0-windows' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [E:\project\safeexam\SafeExamCEF\SafeExamCEF.csproj]
+E:\project\safeexam\SafeExamCEF\SafeExamCEF.csproj : warning NU1903: Package 'CefSharp.Wpf.NETCore' 120.1.110 has a known high severity vulnerability, https://github.com/advisories/GHSA-f87w-3j5w-v58p
+  SafeExamCEF -> E:\project\safeexam\SafeExamCEF\bin\Release\net6.0-windows\win-x64\Procto.dll
+  SafeExamCEF -> E:\project\safeexam\publish\win-x64\
+Build selesai: 12/03/2026  1:07:53,58 
