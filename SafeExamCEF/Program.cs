@@ -24,7 +24,7 @@ namespace Procto
             settings.LogSeverity = LogSeverity.Warning;
             settings.CefCommandLineArgs.Add("disable-gpu", "1");
             settings.CachePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "cache");
-            settings.BrowserSubprocessPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            settings.BrowserSubprocessPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Procto.exe");
             settings.ResourcesDirPath = AppContext.BaseDirectory;
             settings.LocalesDirPath = System.IO.Path.Combine(AppContext.BaseDirectory, "locales");
 

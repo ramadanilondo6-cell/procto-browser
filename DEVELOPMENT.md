@@ -10,14 +10,14 @@
 
 ### 🛡️ Pemantauan Proses
 - [ ] Implementasikan **ProcessMonitor** dengan `System.Diagnostics.Process.GetProcesses()` di background `Timer` (setiap 2 detik)
-- [ ] Baca daftar proses terlarang dari `default.safeexam.json` → field `forbiddenProcesses`
+- [ ] Baca daftar proses terlarang dari `default.procto.json` → field `forbiddenProcesses`
 - [ ] Tampilkan `AlertDialog` jika proses terlarang ditemukan
 - [ ] Opsional: langsung hentikan ujian (tutup app) setelah N kali pelanggaran
 
 ### 🌐 Filter URL / Whitelist
 - [ ] Implementasikan `IRequestHandler.OnBeforeBrowse()` untuk memblokir navigasi ke URL di luar whitelist
 - [ ] Dukung wildcard domain: `*.example.com`
-- [ ] Baca daftar `allowedUrls` dari `default.safeexam.json`
+- [ ] Baca daftar `allowedUrls` dari `default.procto.json`
 - [ ] Jika URL diblokir: tampilkan halaman peringatan sederhana (bukan error blank)
 
 ### 🔑 Config Key Header (Kompatibilitas SEB)
