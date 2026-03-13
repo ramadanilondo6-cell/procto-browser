@@ -94,9 +94,9 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 echo [3/4] Menyalin file konfigurasi...
-if exist "%~dp0default.safeexam.json" (
+if exist "%~dp0default.procto.json" (
     if not exist "%OUT_DIR%\config" mkdir "%OUT_DIR%\config"
-    copy /Y "%~dp0default.safeexam.json" "%OUT_DIR%\config\default.safeexam.json" >> "%LOG_FILE%" 2>&1
+    copy /Y "%~dp0default.procto.json" "%OUT_DIR%\config\default.procto.json" >> "%LOG_FILE%" 2>&1
     echo       Konfigurasi disalin.
 ) else (
     echo       Konfigurasi tidak ditemukan, dilewati.

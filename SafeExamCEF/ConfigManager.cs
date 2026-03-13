@@ -46,6 +46,31 @@ namespace Procto
             }
         }
 
+        private static string DecryptAes(string cipherText, string passPhrase)
+        {
+            var fullCipher = Convert.FromBase64String(cipherText);
+            var iv = new byte[16];
+            var cipher = new byte[fullCipher.Length - 16];
+
+            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, cipher.Length);
+
+            using (var sha256 = SHA256.Create())
+            {
+                var key = sha256.ComputeHash(Encoding.UTF8.GetBytes(passPhrase));
+                using (var aes = Aes.Create())
+                {
+                    using (var decryptor = aes.CreateDecryptor(key, iv))
+                    using (var ms = new MemoryStream(cipher))
+                    using (var cs = new System.Security.Cryptography.CryptoStream(ms, decryptor, System.Security.Cryptography.CryptoStreamMode.Read))
+                    using (var sr = new StreamReader(cs))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+        }
+
         public bool Load()
         {
             try
@@ -57,8 +82,29 @@ namespace Procto
                     return false;
                 }
 
-                var json = File.ReadAllText(_configPath);
-                _config = JsonSerializer.Deserialize<ExamConfig>(json);
+                var rawText = File.ReadAllText(_configPath);
+                string json = rawText;
+
+                // Simple check if it's an AES encrypted config payload
+                if (rawText.StartsWith("AES:"))
+                {
+                    try
+                    {
+                        string cipherText = rawText.Substring(4);
+                        // Using a hardcoded internal key for simple extraction protection
+                        // (Can be improved with per-school keys in the future)
+                        json = DecryptAes(cipherText, "ProctoSecureKey2025!");
+                        Log.Information("Successfully decrypted configuration file");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "Failed to decrypt configuration file. Ensure it is a valid Procto config.");
+                        _config = new ExamConfig();
+                        return false;
+                    }
+                }
+
+                _config = JsonSerializer.Deserialize<ExamConfig>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 if (_config == null)
                 {

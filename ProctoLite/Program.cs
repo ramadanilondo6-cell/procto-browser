@@ -27,7 +27,7 @@ namespace ProctoLite
             settings.CefCommandLineArgs.Add("disable-software-rasterizer", "1");
             settings.CefCommandLineArgs.Add("disable-extensions", "1");
             settings.CachePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "cache");
-            settings.BrowserSubprocessPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            settings.BrowserSubprocessPath = System.IO.Path.Combine(AppContext.BaseDirectory, "ProctoLite.exe");
             settings.ResourcesDirPath = AppContext.BaseDirectory;
             settings.LocalesDirPath = System.IO.Path.Combine(AppContext.BaseDirectory, "locales");
 

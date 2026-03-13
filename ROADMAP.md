@@ -65,7 +65,7 @@ Rilis     Branding  Stabil   Fitur+   Enterprise  Cloud
 
 ### Manajemen Konfigurasi
 
-- [ ] **Config Editor GUI** — Aplikasi kecil terpisah untuk membuat dan mengedit `default.safeexam.json` tanpa teks manual
+- [ ] **Config Editor GUI** — Aplikasi kecil terpisah untuk membuat dan mengedit `default.procto.json` tanpa teks manual
 - [ ] **Config Validator** — Cek konfigurasi sebelum ujian dimulai dan tampilkan peringatan jika ada kesalahan
 - [ ] **Profile Ujian** — Simpan beberapa profil konfigurasi (UTS, UAS, Try Out, dll.)
 - [ ] **Config Encryption** — Enkripsi file konfigurasi agar tidak bisa diedit peserta

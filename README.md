@@ -26,7 +26,7 @@ Dirancang untuk mencegah kecurangan dengan mengunci akses perangkat selama ujian
 | 🔊 **Kontrol Volume**    | Pengaturan volume sistem terintegrasi langsung di toolbar                        |
 | 🖥️ **Splash Screen**     | Layar pembuka animasi dengan verifikasi status sistem                            |
 | 🔑 **Password Keluar**   | Pengajar dapat mengunci tombol keluar dengan password                            |
-| 📁 **Konfigurasi JSON**  | Semua pengaturan ujian dikonfigurasi via file `default.safeexam.json`            |
+| 📁 **Konfigurasi JSON**  | Semua pengaturan ujian dikonfigurasi via file `default.procto.json`            |
 | 📝 **Logging**           | Log sesi lengkap tersimpan otomatis di folder `logs/`                            |
 
 ---
@@ -50,7 +50,7 @@ Dirancang untuk mencegah kecurangan dengan mengunci akses perangkat selama ujian
 
 ## ⚙️ Konfigurasi
 
-Buat atau edit file `config/default.safeexam.json`:
+Buat atau edit file `config/default.procto.json`:
 
 ```json
 {
@@ -113,7 +113,7 @@ publish/
 └── win-x64/
     ├── Procto.exe          ← File utama (~430 MB all-in-one)
     └── config/
-        └── default.safeexam.json
+        └── default.procto.json
 ```
 
 ### Build via Command Line
@@ -136,7 +136,7 @@ Cukup salin **dua item** ke setiap komputer:
 📁 Folder Ujian/
 ├── 📄 Procto.exe             ← Aplikasi (copy ke semua komputer)
 └── 📁 config/
-    └── 📄 default.safeexam.json  ← Konfigurasi ujian
+    └── 📄 default.procto.json  ← Konfigurasi ujian
 ```
 
 Jalankan `Procto.exe` — tidak perlu instalasi apapun.
@@ -164,7 +164,7 @@ safeexam/
 ├── publish/                      # Output build
 ├── build-custom.bat              # Script build interaktif
 ├── update-nuget.bat              # Update NuGet packages
-└── default.safeexam.json         # Konfigurasi default
+└── default.procto.json         # Konfigurasi default
 ```
 
 ---

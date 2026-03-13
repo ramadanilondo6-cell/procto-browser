@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("SafeExamCEF")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Procto")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67becc62de28e8c9d37ae5784200dc675699f665")]
-[assembly: System.Reflection.AssemblyProductAttribute("SafeExamCEF")]
-[assembly: System.Reflection.AssemblyTitleAttribute("SafeExamCEF")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e1ee36e382bbf00b2fe34eb1e28c20d66de48ab")]
+[assembly: System.Reflection.AssemblyProductAttribute("Procto")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Procto")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]

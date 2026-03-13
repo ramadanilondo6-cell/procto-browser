@@ -3,51 +3,51 @@
 ## 1. Fitur Lockdown (Menyerupai Safe Exam Browser)
 
 ### 🔒 Keamanan Keyboard & Sistem
-- [ ] **Block `Alt+Tab`, `Alt+F4`** menggunakan `KeyboardHook` yang sudah ada — tambahkan `VK_F4` saat key `Alt` ditekan
-- [ ] **Block `Ctrl+Alt+Del`** — tidak bisa di-hook melalui cara biasa, gunakan `SystemParametersInfo(SPI_SETSCREENSAVERRUNNING)` atau registrasi SAS filter driver
-- [ ] **Block Task Switcher (Win+Tab)** — tambahkan VK_TAB saat Win ditekan ke dalam `KeyboardHook`
-- [ ] **Disable shortcut browser**: `Ctrl+R` (reload), `Ctrl+P` (print), `Ctrl+S` (save), `F5`, `F12` — implementasikan di `IKeyboardHandler.OnPreKeyEvent`
+- [x] **Block `Alt+Tab`, `Alt+F4`** menggunakan `KeyboardHook` yang sudah ada — tambahkan `VK_F4` saat key `Alt` ditekan
+- [x] **Block `Ctrl+Alt+Del`** — tidak bisa di-hook melalui cara biasa, gunakan `SystemParametersInfo(SPI_SETSCREENSAVERRUNNING)` atau registrasi SAS filter driver
+- [x] **Block Task Switcher (Win+Tab)** — tambahkan VK_TAB saat Win ditekan ke dalam `KeyboardHook`
+- [x] **Disable shortcut browser**: `Ctrl+R` (reload), `Ctrl+P` (print), `Ctrl+S` (save), `F5`, `F12` — implementasikan di `IKeyboardHandler.OnPreKeyEvent`
 
 ### 🛡️ Pemantauan Proses
-- [ ] Implementasikan **ProcessMonitor** dengan `System.Diagnostics.Process.GetProcesses()` di background `Timer` (setiap 2 detik)
-- [ ] Baca daftar proses terlarang dari `default.safeexam.json` → field `forbiddenProcesses`
-- [ ] Tampilkan `AlertDialog` jika proses terlarang ditemukan
-- [ ] Opsional: langsung hentikan ujian (tutup app) setelah N kali pelanggaran
+- [x] Implementasikan **ProcessMonitor** dengan `System.Diagnostics.Process.GetProcesses()` di background `Timer` (setiap 2 detik)
+- [x] Baca daftar proses terlarang dari `default.procto.json` → field `forbiddenProcesses`
+- [x] Tampilkan `AlertDialog` jika proses terlarang ditemukan
+- [x] Opsional: langsung hentikan ujian (tutup app) setelah N kali pelanggaran
 
 ### 🌐 Filter URL / Whitelist
-- [ ] Implementasikan `IRequestHandler.OnBeforeBrowse()` untuk memblokir navigasi ke URL di luar whitelist
-- [ ] Dukung wildcard domain: `*.example.com`
-- [ ] Baca daftar `allowedUrls` dari `default.safeexam.json`
-- [ ] Jika URL diblokir: tampilkan halaman peringatan sederhana (bukan error blank)
+- [x] Implementasikan `IRequestHandler.OnBeforeBrowse()` untuk memblokir navigasi ke URL di luar whitelist
+- [x] Dukung wildcard domain: `*.example.com`
+- [x] Baca daftar `allowedUrls` dari `default.procto.json`
+- [x] Jika URL diblokir: tampilkan halaman peringatan sederhana (bukan error blank)
 
 ### 🔑 Config Key Header (Kompatibilitas SEB)
-- [ ] Hitung SHA-256 dari isi file konfigurasi saat startup
-- [ ] Sisipkan header `X-SafeExamBrowser-ConfigKeyHash: <hash>` ke setiap request HTTP melalui `IRequestHandler.GetResourceRequestHandler()`
-- [ ] Server ujian bisa memverifikasi bahwa request berasal dari SafeExamCEF
+- [x] Hitung SHA-256 dari isi file konfigurasi saat startup
+- [x] Sisipkan header `X-SafeExamBrowser-ConfigKeyHash: <hash>` ke setiap request HTTP melalui `IRequestHandler.GetResourceRequestHandler()`
+- [x] Server ujian bisa memverifikasi bahwa request berasal dari SafeExamCEF
 
 ### 📋 Clipboard
-- [ ] Nonaktifkan clipboard paste (`Ctrl+V`) di dalam browser dengan memblokir shortcut di `OnPreKeyEvent`
-- [ ] Opsional: disable clipboard OS sepenuhnya saat ujian berlangsung, restore saat keluar
+- [x] Nonaktifkan clipboard paste (`Ctrl+V`) di dalam browser dengan memblokir shortcut di `OnPreKeyEvent`
+- [x] Opsional: disable clipboard OS sepenuhnya saat ujian berlangsung, restore saat keluar
 
 ### 🖨️ Print
-- [ ] Blokir `Ctrl+P` dan print via CefSharp di `IKeyboardHandler`
-- [ ] Nonaktifkan print dari menu CefSharp jika ada
+- [x] Blokir `Ctrl+P` dan print via CefSharp di `IKeyboardHandler`
+- [x] Nonaktifkan print dari menu CefSharp jika ada
 
 ---
 
-## 2. Konfigurasi (`.safeexam.json`)
-- [ ] **Load config dari file** — implementasikan `ConfigManager.cs` menggunakan `System.Text.Json`
-- [ ] **Model config** (`ExamConfig.cs`) sudah dirancang — buat dan gunakan di `App.xaml.cs`
-- [ ] Pass `config.startUrl` ke `ChromiumWebBrowser.Address` saat startup (bukan hardcode)
-- [ ] Pass `config.browserTitle` ke `Window.Title`
-- [ ] Validasi field wajib pada startup; tampilkan error dan exit jika tidak valid
+## 2. Konfigurasi (`default.procto.json`)
+- [x] **Load config dari file** — implementasikan `ConfigManager.cs` menggunakan `System.Text.Json` (atau `Newtonsoft.Json`)
+- [x] **Model config** (`ExamConfig.cs`) sudah dirancang — buat dan gunakan di `App.xaml.cs`
+- [x] Pass `config.startUrl` ke `ChromiumWebBrowser.Address` saat startup (bukan hardcode)
+- [x] Pass `config.browserTitle` ke `Window.Title`
+- [x] Validasi field wajib pada startup; tampilkan error dan exit jika tidak valid
 
 ---
 
 ## 3. Pengembangan UI Sederhana
 
 ### 🖥️ Toolbar Atas (StatusBar)
-Tambahkan panel tipis di atas browser (tinggi ~36px):
+[x] Tambahkan panel tipis di atas browser (tinggi ~36px):
 
 ```xml
 <Grid>
@@ -82,11 +82,11 @@ Tambahkan panel tipis di atas browser (tinggi ~36px):
 </Grid>
 ```
 
-- Perbarui `ClockText` setiap detik menggunakan `DispatcherTimer`
-- Tombol "Keluar Ujian" membuka `QuitDialog` dengan input password
+- [x] Perbarui `ClockText` setiap detik menggunakan `DispatcherTimer`
+- [x] Tombol "Keluar Ujian" membuka `QuitDialog` dengan input password
 
 ### 🚪 Dialog Keluar (QuitDialog)
-Dialog modal sederhana:
+[x] Dialog modal sederhana:
 
 ```
 ┌────────────────────────────┐
@@ -99,12 +99,12 @@ Dialog modal sederhana:
 └────────────────────────────┘
 ```
 
-- `Window.ShowDialog()` → blokir interaksi ke jendela utama sebelum dialog ditutup
-- Bandingkan input dengan `config.quitPassword`
-- Jika salah → tampilkan pesan "Password salah", log percobaan
+- [x] `Window.ShowDialog()` → blokir interaksi ke jendela utama sebelum dialog ditutup
+- [x] Bandingkan input dengan `config.quitPassword`
+- [x] Jika salah → tampilkan pesan "Password salah", log percobaan
 
 ### ⚠️ Dialog Peringatan (AlertDialog)
-Untuk notifikasi proses terlarang:
+[x] Untuk notifikasi proses terlarang:
 
 ```
 ⚠ PERINGATAN
@@ -126,8 +126,8 @@ Kejadian ini telah dicatat.
 ---
 
 ## 4. Logging Aktivitas
-- [ ] Gunakan **Serilog** (sudah terinstall) → log ke file `logs/session_<tanggal>.log`
-- [ ] Event yang perlu dilog:
+- [x] Gunakan **Serilog** (sudah terinstall) → log ke file `logs/session_<tanggal>.log`
+- [x] Event yang perlu dilog:
   - Sesi dimulai / selesai
   - URL yang dikunjungi
   - Shortcut keyboard yang diblokir
@@ -137,26 +137,26 @@ Kejadian ini telah dicatat.
 ---
 
 ## 5. Distribusi & Deployment
-- [ ] **Publish sebagai self-contained** (tidak butuh .NET terinstall di PC peserta):
+- [x] **Publish sebagai self-contained** (tidak butuh .NET terinstall di PC peserta):
   ```bat
   dotnet publish SafeExamCEF\SafeExamCEF.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
   ```
-- [ ] Distribusikan file `.safeexam.json` bersama `.exe` ke folder yang sama
-- [ ] Opsional: Enkripsi file config menggunakan AES-256 agar peserta tidak bisa membacanya
+- [x] Distribusikan file `.procto.json` bersama `.exe` ke folder yang sama
+- [x] Opsional: Enkripsi file config menggunakan AES-256 agar peserta tidak bisa membacanya
 
 ---
 
 ## Prioritas Pengembangan (Rekomendasi Urutan)
 
-| Prioritas | Fitur | Dampak |
+| Prioritas | Fitur | Status |
 |---|---|---|
-| 🔴 Sangat Penting | Load config JSON + startUrl | Fungsionalitas dasar |
-| 🔴 Sangat Penting | QuitDialog dengan password | Keamanan ujian |
-| 🔴 Sangat Penting | Block Alt+Tab, Win key | Lockdown pokok |
-| 🟠 Penting | Filter URL (whitelist) | Keamanan konten |
-| 🟠 Penting | ProcessMonitor | Deteksi kecurangan |
-| 🟡 Sedang | StatusBar UI + jam | Pengalaman pengguna |
-| 🟡 Sedang | Serilog audit log | Investigasi pelanggaran |
-| 🟢 Opsional | Config Key Header (SHA-256) | Kompatibilitas SEB |
-| 🟢 Opsional | Publish self-contained | Kemudahan distribusi |
-| 🟢 Opsional | Enkripsi file config | Keamanan distribusi |
+| 🔴 Sangat Penting | Load config JSON + startUrl | ✅ Selesai |
+| 🔴 Sangat Penting | QuitDialog dengan password | ✅ Selesai |
+| 🔴 Sangat Penting | Block Alt+Tab, Win key | ✅ Selesai |
+| 🟠 Penting | Filter URL (whitelist) | ✅ Selesai |
+| 🟠 Penting | ProcessMonitor | ✅ Selesai |
+| 🟡 Sedang | StatusBar UI + jam | ✅ Selesai |
+| 🟡 Sedang | Serilog audit log | ✅ Selesai |
+| 🟢 Opsional | Config Key Header (SHA-256) | ✅ Selesai |
+| 🟢 Opsional | Publish self-contained | ✅ Selesai |
+| 🟢 Opsional | Enkripsi file config | ✅ Selesai |

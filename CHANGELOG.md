@@ -191,7 +191,7 @@ publish/
 │   ├── *.pak                 ← Required (resource files)
 │   ├── *.bin                 ← Required (dictionary files)
 │   └── config/
-│       └── default.safeexam.json
+│       └── default.procto.json
 └── win-x86/                  # 32-bit version
     └── (same structure as x64)
 ```
@@ -223,7 +223,7 @@ publish/
 
 ### ⚙️ Configuration
 
-No changes to configuration file format. Existing `default.safeexam.json` files remain compatible.
+No changes to configuration file format. Existing `default.procto.json` files remain compatible.
 
 ### 📦 Dependencies
 
@@ -238,7 +238,7 @@ Same as v1.0.0:
 
 #### For Users
 1. Download the appropriate version for your system (x64 for most modern PCs)
-2. Copy your existing `default.safeexam.json` to the new installation directory
+2. Copy your existing `default.procto.json` to the new installation directory
 3. Run `SafeExamCEF.exe`
 
 #### For Developers
