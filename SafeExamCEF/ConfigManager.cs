@@ -58,7 +58,7 @@ namespace Procto
                 }
 
                 var json = File.ReadAllText(_configPath);
-                _config = JsonSerializer.Deserialize<ExamConfig>(json);
+                _config = JsonSerializer.Deserialize<ExamConfig>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 if (_config == null)
                 {
