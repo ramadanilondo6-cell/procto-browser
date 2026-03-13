@@ -13,6 +13,7 @@ namespace Procto
         private readonly bool _allowClipboard;
         private readonly bool _allowPrint;
         private readonly string _configKeyHash;
+        private System.Windows.Forms.Timer _clipboardTimer;
 
         public bool IsActive { get; private set; } = false;
 
@@ -74,6 +75,22 @@ namespace Procto
                 IntPtr.Zero,
                 0);
 
+            if (!_allowClipboard)
+            {
+                _clipboardTimer = new System.Windows.Forms.Timer();
+                _clipboardTimer.Interval = 1000; // Clear clipboard every 1 second
+                _clipboardTimer.Tick += (sender, e) =>
+                {
+                    try
+                    {
+                        System.Windows.Clipboard.Clear();
+                    }
+                    catch { } // Ignore errors if clipboard is locked by another process temporarily
+                };
+                _clipboardTimer.Start();
+                Log.Information("OS Clipboard blocking timer started");
+            }
+
             IsActive = true;
             Log.Information("LockdownEngine enabled successfully");
         }
@@ -82,6 +99,8 @@ namespace Procto
         {
             Log.Information("LockdownEngine disabling...");
 
+            _clipboardTimer?.Stop();
+            _clipboardTimer?.Dispose();
             _keyboardHook?.Disable();
             _processMonitor?.Stop();
 

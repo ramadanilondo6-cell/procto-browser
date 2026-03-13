@@ -12,7 +12,7 @@
 - [x] Implementasikan **ProcessMonitor** dengan `System.Diagnostics.Process.GetProcesses()` di background `Timer` (setiap 2 detik)
 - [x] Baca daftar proses terlarang dari `default.procto.json` → field `forbiddenProcesses`
 - [x] Tampilkan `AlertDialog` jika proses terlarang ditemukan
-- [ ] Opsional: langsung hentikan ujian (tutup app) setelah N kali pelanggaran
+- [x] Opsional: langsung hentikan ujian (tutup app) setelah N kali pelanggaran
 
 ### 🌐 Filter URL / Whitelist
 - [x] Implementasikan `IRequestHandler.OnBeforeBrowse()` untuk memblokir navigasi ke URL di luar whitelist
@@ -27,11 +27,11 @@
 
 ### 📋 Clipboard
 - [x] Nonaktifkan clipboard paste (`Ctrl+V`) di dalam browser dengan memblokir shortcut di `OnPreKeyEvent`
-- [ ] Opsional: disable clipboard OS sepenuhnya saat ujian berlangsung, restore saat keluar
+- [x] Opsional: disable clipboard OS sepenuhnya saat ujian berlangsung, restore saat keluar
 
 ### 🖨️ Print
 - [x] Blokir `Ctrl+P` dan print via CefSharp di `IKeyboardHandler`
-- [ ] Nonaktifkan print dari menu CefSharp jika ada
+- [x] Nonaktifkan print dari menu CefSharp jika ada
 
 ---
 
@@ -142,7 +142,7 @@ Kejadian ini telah dicatat.
   dotnet publish SafeExamCEF\SafeExamCEF.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
   ```
 - [x] Distribusikan file `.procto.json` bersama `.exe` ke folder yang sama
-- [ ] Opsional: Enkripsi file config menggunakan AES-256 agar peserta tidak bisa membacanya
+- [x] Opsional: Enkripsi file config menggunakan AES-256 agar peserta tidak bisa membacanya
 
 ---
 
@@ -159,4 +159,4 @@ Kejadian ini telah dicatat.
 | 🟡 Sedang | Serilog audit log | ✅ Selesai |
 | 🟢 Opsional | Config Key Header (SHA-256) | ✅ Selesai |
 | 🟢 Opsional | Publish self-contained | ✅ Selesai |
-| 🟢 Opsional | Enkripsi file config | [ ] Belum |
+| 🟢 Opsional | Enkripsi file config | ✅ Selesai |
