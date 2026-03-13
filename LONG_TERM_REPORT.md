@@ -4,23 +4,26 @@ Procto dan ProctoLite adalah aplikasi ujian yang berkembang pesat. Berikut adala
 
 ---
 
-## 📅 Visi Jangka Panjang (1 - 2 Tahun ke Depan)
+## 📅 Visi Jangka Panjang (Pengembangan Lingkungan Lokal ala Safe Exam Browser)
 
-### 1. Sistem Pengawasan Aktif Berbasis AI
-Aplikasi tidak lagi sekadar pasif memblokir interaksi (Lockdown), tetapi aktif mendeteksi kecurangan.
-*   **Webcam Tracking**: Mendeteksi jika wajah peserta tidak berada di layar atau jika ada lebih dari satu orang di bingkai kamera.
-*   **Audio Monitoring**: Mendeteksi suara percakapan menggunakan AI noise analysis dan merekamnya sebagai *flag* pelanggaran.
-*   **Screen Recording Bawah Air**: Jika jaringan terputus, sesi ujian dapat direkam secara lokal (dienkripsi) lalu dikirim ke server setelah koneksi stabil.
+Fokus pengembangan Procto ke depannya adalah memperkuat penguncian (lockdown) di tingkat lokal/sistem operasi Windows, sehingga ekuivalen atau melampaui kemampuan Safe Exam Browser (SEB) tanpa bergantung pada infrastruktur *cloud* yang kompleks.
 
-### 2. Integrasi Cloud Dashboard (Procto Server)
-*   **Monitoring Real-Time**: Pengawas dapat melihat layar peserta mana pun dari browser mereka sendiri, mirip dengan fitur LAN *screen monitoring* tetapi dioptimalkan untuk Cloud.
-*   **Centralized Configuration**: Konfigurasi `default.procto.json` tidak lagi disebar via flashdisk atau LAN, melainkan di-pull langsung dari URL Server (contoh: `https://ujian.sekolah.id/procto.json`).
-*   **Kill Switch Terpusat**: Pengawas dapat mematikan paksa aplikasi Procto milik peserta tertentu yang ketahuan curang dari jarak jauh.
+### 1. Penguatan Keamanan Sistem OS (Deep OS Lockdown)
+*   **Modifikasi Registry Sementara (Kiosk Mode)**: Memodifikasi registry Windows saat aplikasi berjalan untuk menyembunyikan opsi "Task Manager", "Switch User", dan "Sign Out" dari layar `Ctrl+Alt+Del`. Nilai registry ini akan dikembalikan (restore) saat ujian selesai.
+*   **Pemblokiran Virtual Desktop & Multi-Monitor**: Mencegah peserta ujian membuka virtual desktop baru (`Win+Tab` / `Win+Ctrl+D`) atau menggunakan layar eksternal yang dapat dimanfaatkan untuk menyontek.
+*   **Pengamanan Papan Klip (Clipboard) Terisolasi**: Memastikan *copy-paste* dinonaktifkan sepenuhnya di OS atau diisolasi agar peserta tidak bisa menyalin soal keluar dari browser atau menempelkan jawaban dari dokumen lain.
 
-### 3. Dukungan Lintas Platform
-*   Meskipun .NET 6.0 + WPF sangat tangguh di Windows, Procto perlu dikembangkan dengan teknologi seperti **MAUI** atau **Avalonia** untuk mendukung:
-    *   **macOS**: Menggunakan WKWebView (Mac) yang dikunci.
-    *   **ChromeOS / Android**: Untuk ujian yang berbasis Tablet dan Chromebook.
+### 2. Validasi Konfigurasi Lokal (Config Key & Exam Key)
+*   **Config Key (Hashing Konfigurasi)**: Mengimplementasikan sistem *Config Key* seperti SEB. Procto akan menghitung hash SHA-256 dari file `default.procto.json`. Hash ini disisipkan di setiap HTTP Request Header (contoh: `X-Procto-ConfigKey`) sehingga server ujian (misal: Moodle/CBT lokal) dapat memverifikasi bahwa peserta benar-benar menggunakan pengaturan ujian yang valid dan belum diubah.
+*   **Enkripsi File Konfigurasi**: Mendukung file `default.procto.json` yang dienkripsi dengan password, memastikan siswa tidak dapat membaca atau memodifikasi daftar URL yang diizinkan (Whitelist) menggunakan teks editor biasa.
+
+### 3. Kontrol Peramban Terpusat (Strict Browser Constraints)
+*   **Pembersihan Data Sesi Mandiri (Incognito-like)**: Menghapus seluruh cache, *Local Storage*, *Session Storage*, dan *Cookies* secara otomatis saat aplikasi ditutup agar peserta berikutnya menggunakan sesi yang benar-benar bersih.
+*   **URL & Wi-Fi Filtering (LAN/Lokal)**: URL Filter Handler yang mendalam tidak hanya membatasi link yang diklik, tetapi juga memblokir injeksi *iframe* atau *pop-up* dari domain yang tidak masuk *whitelist*.
+*   **User-Agent Spoofing Otomatis**: Secara bawaan mengganti CefSharp User-Agent agar menyerupai browser OS bawaan untuk memastikan kompatibilitas penuh dengan sistem LMS lokal.
+
+### 4. Integrasi Aplikasi Pihak Ketiga (Local Allowed Resources)
+*   Alih-alih terkoneksi ke server untuk mengawasi layar, Procto akan mendukung peluncuran aplikasi lokal yang secara spesifik diizinkan (misalnya `calc.exe` atau Notepad) sebagai proses *child* di dalam *overlay* ujian yang aman tanpa mengorbankan lockdown layar.
 
 ---
 
